@@ -6,7 +6,7 @@ const navigationLinks = [
   { label: 'Tours', href: '/tours' },
   { label: 'Destinations', href: '/#destinations' },
   { label: 'Travel Guides', href: '/#travel-guides' },
-  { label: 'About', href: '/#why-choose-us' },
+  { label: 'About', href: '/#about' },
   { label: 'Contact', href: '/#contact' },
 ]
 

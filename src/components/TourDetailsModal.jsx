@@ -36,6 +36,7 @@ function TourDetailsModal({ tour, onClose }) {
       destination: tour.destination,
     })
 
+    onClose()
     navigate(`/?${params.toString()}#enquiry`)
   }
 

@@ -90,14 +90,14 @@ function TripEnquiryForm({ initialDestination = '', initialMessage = '' }) {
     } catch (error) {
       console.error('Trip enquiry submission failed:', error)
       setIsSubmitting(false)
-      setSubmissionError('We could not send your enquiry right now. Please try again.')
+      setSubmissionError(error?.message || 'We could not send your enquiry right now. Please try again.')
       return
     }
 
     setIsSubmitting(false)
     setIsSubmitted(true)
     setFormData(emptyForm)
-    window.alert('Your enquiry was added successfully.')
+    window.alert('Enquiry submitted successfully')
   }
 
   const resetForm = () => {

@@ -84,16 +84,6 @@ function Tours() {
     <>
       <Navbar />
       <main>
-        <section className="bg-[var(--background)] px-5 pb-12 pt-20 sm:px-8 sm:pb-16 sm:pt-24 lg:px-10 lg:pb-20 lg:pt-28">
-          <div className="mx-auto max-w-7xl">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--secondary)]">Find your next escape</p>
-            <h1 className="mt-4 max-w-3xl text-[var(--foreground)]">Explore Our Tours</h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-[var(--muted)] sm:text-lg">
-              Discover thoughtfully planned journeys across India, from quiet backwaters to high mountain passes.
-            </p>
-          </div>
-        </section>
-
         <section className="bg-[var(--surface)] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20" aria-labelledby="tours-grid-heading">
           <div className="mx-auto max-w-7xl">
             <div className="mb-8 space-y-6 sm:mb-10">

@@ -15,10 +15,21 @@ import WhyChooseUs from './components/WhyChooseUs'
 import Tours from './pages/Tours'
 
 function Home() {
+  const location = useLocation()
   const [searchParams] = useSearchParams()
   const selectedTour = tours.find((tour) => tour.id === Number(searchParams.get('tourId')))
   const selectedDestination = selectedTour?.destination || searchParams.get('destination') || ''
   const selectedMessage = selectedTour ? `I am interested in the ${selectedTour.name} tour.` : ''
+
+  useEffect(() => {
+    if (location.hash !== '#enquiry') return undefined
+
+    const frame = window.requestAnimationFrame(() => {
+      document.getElementById('enquiry')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    })
+
+    return () => window.cancelAnimationFrame(frame)
+  }, [location.hash])
 
   return (
     <>

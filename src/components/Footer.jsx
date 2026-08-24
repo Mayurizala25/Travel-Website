@@ -4,7 +4,7 @@ const quickLinks = [
   { label: 'Home', href: '/#home' },
   { label: 'Tours', href: '/tours' },
   { label: 'Travel Guides', href: '/#travel-guides' },
-  { label: 'About Us', href: '/#why-choose-us' },
+  { label: 'About Us', href: '/#about' },
 ]
 
 const popularDestinations = [
