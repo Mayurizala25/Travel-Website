@@ -1,10 +1,19 @@
 import { useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { Clock3, Heart, MapPin, Star } from 'lucide-react'
 
 const inrFormatter = new Intl.NumberFormat('en-IN')
 
 function TourCard({ tour }) {
   const [isFavorite, setIsFavorite] = useState(false)
+  const navigate = useNavigate()
+  const location = useLocation()
+
+  const openDetails = () => {
+    const searchParams = new URLSearchParams(location.search)
+    searchParams.set('tourId', tour.id)
+    navigate(`/tours?${searchParams.toString()}`)
+  }
 
   return (
     <article id={`tour-${tour.id}`} className="group scroll-mt-24 overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--surface)] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
@@ -57,12 +66,13 @@ function TourCard({ tour }) {
           </p>
         </div>
 
-        <a
-          href={`/tours#tour-${tour.id}`}
+        <button
+          type="button"
+          onClick={openDetails}
           className="inline-flex w-full items-center justify-center rounded-full border border-[var(--primary)] px-5 py-3 text-sm font-semibold text-[var(--primary)] transition-colors hover:bg-[var(--primary)] hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary)]"
         >
           View Details
-        </a>
+        </button>
       </div>
     </article>
   )

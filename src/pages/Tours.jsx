@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import TourCard from '../components/TourCard'
+import TourDetailsModal from '../components/TourDetailsModal'
 import { tours } from '../data/tours'
 
 const defaultFilters = {
@@ -32,7 +33,7 @@ const durationOptions = [
 const getDurationDays = (duration) => Number.parseInt(duration, 10)
 
 function Tours() {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const [filters, setFilters] = useState(() => ({
     ...defaultFilters,
     search: searchParams.get('search') || '',
@@ -72,6 +73,12 @@ function Tours() {
 
   const clearFilters = () => setFilters(defaultFilters)
   const hasActiveFilters = Object.values(filters).some((value, index) => value !== Object.values(defaultFilters)[index])
+  const selectedTour = tours.find((tour) => tour.id === Number(searchParams.get('tourId')))
+  const closeDetails = () => {
+    const nextSearchParams = new URLSearchParams(searchParams)
+    nextSearchParams.delete('tourId')
+    setSearchParams(nextSearchParams)
+  }
 
   return (
     <>
@@ -198,6 +205,7 @@ function Tours() {
         </section>
       </main>
       <Footer />
+      {selectedTour && <TourDetailsModal tour={selectedTour} onClose={closeDetails} />}
     </>
   )
 }

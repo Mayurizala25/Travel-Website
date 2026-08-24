@@ -1,4 +1,5 @@
-import { BrowserRouter, Route, Routes, useSearchParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { BrowserRouter, Route, Routes, useLocation, useSearchParams } from 'react-router-dom'
 import { tours } from './data/tours'
 import Footer from './components/Footer'
 import FeaturedTours from './components/FeaturedTours'
@@ -36,13 +37,25 @@ function Home() {
   )
 }
 
+function AppRoutes() {
+  const location = useLocation()
+
+  useEffect(() => {
+    document.title = location.pathname === '/tours' ? 'Explore Tours | Explore India' : 'Explore India | Trips & Tours'
+  }, [location.pathname])
+
+  return (
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/tours" element={<Tours />} />
+    </Routes>
+  )
+}
+
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/tours" element={<Tours />} />
-      </Routes>
+      <AppRoutes />
     </BrowserRouter>
   )
 }
