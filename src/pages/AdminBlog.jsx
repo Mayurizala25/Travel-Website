@@ -252,7 +252,7 @@ function AdminBlog() {
                   placeholder="Kashmir Travel Guide"
                   className={inputClass}
                 />
-                <span className="mt-1.5 block text-xs text-muted">Web address: /blog#{slugPreview}</span>
+                <span className="mt-1.5 block text-xs text-muted">Slug: {slugPreview}</span>
               </label>
 
               <label className={labelClass}>

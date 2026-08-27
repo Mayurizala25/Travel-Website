@@ -1,9 +1,9 @@
 import { ArrowRight, CalendarDays, Tag } from 'lucide-react'
 
 // Shared blog card — used on the /blog listing and the home "From the Blog"
-// section so both stay visually identical. `href` is a plain anchor target
-// (an in-page hash on /blog, or "/blog#<id>" from the home page).
-function BlogCard({ post, href }) {
+// section so both stay visually identical. Pass `onReadMore` to open the blog
+// in a modal (the /blog page), or `href` for a plain link (the home page).
+function BlogCard({ post, href, onReadMore }) {
   // Request a card-sized image rather than the full-width hero version.
   const cardImage = post.image.replace(/w=\d+/, 'w=800')
 
@@ -37,18 +37,34 @@ function BlogCard({ post, href }) {
         <h3 className="mt-3 font-serif text-xl font-semibold text-navy">{post.title}</h3>
         <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted">{post.excerpt}</p>
 
-        <a
-          href={href}
-          className="group/more mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-navy transition-colors hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
-        >
-          <span className="border-b border-transparent transition-colors group-hover/more:border-current">
-            Read More
-          </span>
-          <ArrowRight
-            className="size-4 text-gold transition-transform duration-200 group-hover/more:translate-x-1"
-            aria-hidden="true"
-          />
-        </a>
+        {onReadMore ? (
+          <button
+            type="button"
+            onClick={() => onReadMore(post)}
+            className="group/more mt-auto inline-flex items-center gap-1.5 self-start pt-5 text-sm font-semibold text-navy transition-colors hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+          >
+            <span className="border-b border-transparent transition-colors group-hover/more:border-current">
+              Read More
+            </span>
+            <ArrowRight
+              className="size-4 text-gold transition-transform duration-200 group-hover/more:translate-x-1"
+              aria-hidden="true"
+            />
+          </button>
+        ) : (
+          <a
+            href={href}
+            className="group/more mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-navy transition-colors hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+          >
+            <span className="border-b border-transparent transition-colors group-hover/more:border-current">
+              Read More
+            </span>
+            <ArrowRight
+              className="size-4 text-gold transition-transform duration-200 group-hover/more:translate-x-1"
+              aria-hidden="true"
+            />
+          </a>
+        )}
       </div>
     </article>
   )

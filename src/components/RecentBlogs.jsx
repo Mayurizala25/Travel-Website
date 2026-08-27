@@ -45,7 +45,7 @@ function RecentBlogs() {
         >
           {recentPosts.map((post) => (
             <motion.div key={post.id} variants={fadeUp} className="h-full">
-              <BlogCard post={{ ...post, image: post.cover_image_url, imageAlt: post.image_alt_text, date: post.publish_date }} href={`/blog#${post.slug}`} />
+              <BlogCard post={{ ...post, image: post.cover_image_url, imageAlt: post.image_alt_text, date: post.publish_date }} href="/blog" />
             </motion.div>
           ))}
         </motion.div>
