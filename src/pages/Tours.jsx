@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Search, SlidersHorizontal, X } from 'lucide-react'
+import { MapPinned, Search, SlidersHorizontal, X } from 'lucide-react'
 import { useSearchParams } from 'react-router-dom'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
@@ -74,6 +74,7 @@ function Tours() {
   const clearFilters = () => setFilters(defaultFilters)
   const hasActiveFilters = Object.values(filters).some((value, index) => value !== Object.values(defaultFilters)[index])
   const selectedTour = tours.find((tour) => tour.id === Number(searchParams.get('tourId')))
+  const destinationHeading = filters.destination === defaultFilters.destination ? 'Explore Your Next Adventure' : `${filters.destination} journeys`
   const closeDetails = () => {
     const nextSearchParams = new URLSearchParams(searchParams)
     nextSearchParams.delete('tourId')
@@ -84,20 +85,32 @@ function Tours() {
     <>
       <Navbar />
       <main>
-        <section className="bg-[var(--surface)] px-5 py-12 sm:px-8 sm:py-16 lg:px-10 lg:py-20" aria-labelledby="tours-grid-heading">
+        <section className="bg-[var(--background)] px-5 py-10 sm:px-8 sm:py-14 lg:px-10 lg:py-16" aria-labelledby="tours-grid-heading">
           <div className="mx-auto max-w-7xl">
-            <div className="mb-8 space-y-6 sm:mb-10">
-              <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+            <div className="mb-8 overflow-hidden rounded-3xl bg-[var(--primary-hover)] px-6 py-8 text-white shadow-[var(--shadow-lift)] sm:mb-10 sm:px-10 sm:py-10">
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <h2 id="tours-grid-heading" className="text-2xl text-[var(--foreground)] sm:text-3xl">Explore Your Next Adventure</h2>
-                  <p className="mt-2 text-sm text-[var(--muted)]">Find a journey that fits the way you want to travel.</p>
+                  <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--secondary)]">
+                    <MapPinned className="size-4" aria-hidden="true" />
+                    Curated journeys across India
+                  </div>
+                  <h2 id="tours-grid-heading" className="text-3xl text-white sm:text-4xl">{destinationHeading}</h2>
+                  <p className="mt-3 max-w-xl text-sm leading-6 text-white/70">Find a journey that fits the way you want to travel, with clear pricing and thoughtfully planned itineraries.</p>
                 </div>
-                <p className="text-sm font-semibold text-[var(--foreground)]" aria-live="polite">
+                <p className="inline-flex w-fit items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white" aria-live="polite">
                   {filteredTours.length} {filteredTours.length === 1 ? 'tour' : 'tours'} found
                 </p>
               </div>
+            </div>
 
-              <div className="rounded-2xl border border-[var(--border)] bg-[var(--background)] p-4 sm:p-5">
+              <div className="mb-10 rounded-3xl border border-[var(--border)] bg-[var(--surface)] p-5 shadow-[var(--shadow-card)] sm:p-6">
+                <div className="mb-5 flex items-center justify-between gap-4">
+                  <div>
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[var(--secondary)]">Refine your search</p>
+                    <p className="mt-1 text-sm text-[var(--muted)]">Use the filters to find the right pace and place.</p>
+                  </div>
+                  {hasActiveFilters && <span className="hidden text-xs font-semibold text-[var(--primary)] sm:inline">Filters applied</span>}
+                </div>
                 <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-[minmax(0,1.5fr)_repeat(4,minmax(0,1fr))_auto] lg:items-end">
                   <label className="block md:col-span-2 lg:col-span-1">
                     <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.12em] text-[var(--muted)]">Search tours</span>
@@ -170,7 +183,6 @@ function Tours() {
                   </button>
                 </div>
               </div>
-            </div>
 
             {filteredTours.length > 0 ? (
               <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">

@@ -1,18 +1,23 @@
 import { useEffect } from 'react'
 import { BrowserRouter, Route, Routes, useLocation, useSearchParams } from 'react-router-dom'
 import { tours } from './data/tours'
-import Footer from './components/Footer'
-import FeaturedTours from './components/FeaturedTours'
-import Hero from './components/Hero'
 import Navbar from './components/Navbar'
+import Hero from './components/Hero'
 import PopularDestinations from './components/PopularDestinations'
-import TravelCategories from './components/TravelCategories'
-import TravelGuides from './components/TravelGuides'
-import TripEnquiryForm from './components/TripEnquiryForm'
-import Testimonials from './components/Testimonials'
-import TravelCTA from './components/TravelCTA'
+import About from './components/About'
 import WhyChooseUs from './components/WhyChooseUs'
+import Services from './components/Services'
+import FeaturedTrips from './components/FeaturedTrips'
+import TravelStyles from './components/TravelStyles'
+import Testimonials from './components/Testimonials'
+import FAQ from './components/FAQ'
+import CTABanner from './components/CTABanner'
+import ContactForm from './components/ContactForm'
+import RecentBlogs from './components/RecentBlogs'
+import Footer from './components/Footer'
 import Tours from './pages/Tours'
+import Blog from './pages/Blog'
+import AdminBlog from './pages/AdminBlog'
 
 function Home() {
   const location = useLocation()
@@ -34,15 +39,20 @@ function Home() {
   return (
     <>
       <Navbar />
-      <Hero />
-      <FeaturedTours />
-      <PopularDestinations />
-      <TravelCategories />
-      <WhyChooseUs />
-      <TravelGuides />
-      <Testimonials />
-      <TravelCTA />
-      <TripEnquiryForm initialDestination={selectedDestination} initialMessage={selectedMessage} />
+      <main>
+        <Hero />
+        <PopularDestinations />
+        <About />
+        <WhyChooseUs />
+        <Services />
+        <FeaturedTrips />
+        <TravelStyles />
+        <Testimonials />
+        <FAQ />
+        <RecentBlogs />
+        <CTABanner />
+        <ContactForm initialDestination={selectedDestination} initialMessage={selectedMessage} />
+      </main>
       <Footer />
     </>
   )
@@ -52,13 +62,20 @@ function AppRoutes() {
   const location = useLocation()
 
   useEffect(() => {
-    document.title = location.pathname === '/tours' ? 'Explore Tours | Explore India' : 'Explore India | Trips & Tours'
+    document.title =
+      location.pathname === '/tours'
+        ? 'Explore Tours | Rudra Tour & Travelling'
+        : location.pathname === '/blog'
+          ? 'India Travel Guides | Rudra Tour & Travelling'
+        : 'Rudra Tour & Travelling | Explore India'
   }, [location.pathname])
 
   return (
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/tours" element={<Tours />} />
+      <Route path="/blog" element={<Blog />} />
+      <Route path="/admin/blog" element={<AdminBlog />} />
     </Routes>
   )
 }

@@ -21,6 +21,8 @@ function TourCard({ tour }) {
         <img
           src={tour.image}
           alt={`${tour.name} in ${tour.destination}`}
+          loading="lazy"
+          decoding="async"
           className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />

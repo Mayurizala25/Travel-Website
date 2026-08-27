@@ -1,18 +1,43 @@
 @import 'tailwindcss';
 
-:root {
-  --primary: #123c3a;
-  --primary-hover: #0d2f2d;
-  --secondary: #d6a84f;
-  --background: #f8fafc;
-  --foreground: #17211f;
-  --muted: #66736f;
-  --footer: #102a28;
-  --footer-muted: #a6b5af;
-  --surface: #ffffff;
-  --border: #e2e8f0;
+/* ------------------------------------------------------------------ */
+/*  Design tokens — Rudra Tour & Travelling                            */
+/*  Primary navy #0F2545 · Accent gold #E0A52C · Off-white #F7F8FA     */
+/* ------------------------------------------------------------------ */
+@theme {
+  --color-navy: #0f2545;
+  --color-navy-deep: #0a1a33;
+  --color-navy-soft: #1c3a63;
+  --color-gold: #e0a52c;
+  --color-gold-deep: #c68a17;
+  --color-cream: #f7f8fa;
+  --color-ink: #14213a;
+  --color-muted: #5b6472;
+  --color-line: #e6e9ef;
 
-  font-family: 'Avenir Next', Avenir, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-serif: 'Playfair Display', ui-serif, Georgia, 'Times New Roman', serif;
+
+  --shadow-card: 0 1px 2px rgba(15, 37, 69, 0.04), 0 12px 32px -12px rgba(15, 37, 69, 0.16);
+  --shadow-lift: 0 2px 4px rgba(15, 37, 69, 0.06), 0 28px 60px -20px rgba(15, 37, 69, 0.28);
+}
+
+/* Legacy variable names still used by the /tours page, TourCard and
+   TourDetailsModal — remapped onto the new palette so everything stays
+   visually consistent. */
+:root {
+  --primary: #0f2545;
+  --primary-hover: #0a1a33;
+  --secondary: #e0a52c;
+  --background: #f7f8fa;
+  --foreground: #14213a;
+  --muted: #5b6472;
+  --footer: #0a1a33;
+  --footer-muted: #aebacb;
+  --surface: #ffffff;
+  --border: #e6e9ef;
+
+  font-family: var(--font-sans);
   color: var(--foreground);
   background: var(--background);
   font-synthesis: none;
@@ -27,77 +52,111 @@
   box-sizing: border-box;
 }
 
-body {
-  margin: 0;
-  min-width: 320px;
-  min-height: 100vh;
-  overflow-x: hidden;
-  line-height: 1.5;
+/* Base element styles live in @layer base so Tailwind utilities
+   (e.g. text-white on a heading) always win the cascade. */
+@layer base {
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+    background: var(--background);
+    font-family: var(--font-sans);
+  }
+
+  #root {
+    min-height: 100svh;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    margin: 0;
+    font-family: var(--font-serif);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    color: var(--foreground);
+  }
+
+  h1 {
+    font-size: clamp(2.5rem, 5.4vw, 4.25rem);
+  }
+
+  h2 {
+    font-size: clamp(1.9rem, 3.4vw, 3rem);
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+  }
+
+  section {
+    scroll-margin-top: 5rem;
+  }
 }
 
-#root {
-  min-height: 100svh;
-}
-
-h1,
-h2,
-h3,
-h4 {
-  margin: 0;
-  font-family: Georgia, 'Times New Roman', serif;
-  font-weight: 500;
-  letter-spacing: 0;
-  line-height: 1.1;
-}
-
-h1 {
-  font-size: clamp(2.25rem, 5vw, 4.5rem);
-}
-
-h2 {
-  font-size: clamp(1.75rem, 3vw, 3rem);
-}
-
-p {
-  margin: 0;
-  color: var(--muted);
-}
-
-button,
-input,
-select {
-  font: inherit;
-}
-
-img {
-  display: block;
-  max-width: 100%;
-}
-
-.navbar-plan-trip {
-  background-color: #123c3a;
+::selection {
+  background: var(--secondary);
   color: #ffffff;
 }
 
-.navbar-plan-trip:hover {
-  background-color: #0d2f2d;
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
 
-.travel-cta-primary {
-  background-color: #ffffff;
-  color: #123c3a;
+/* ------------------------------------------------------------------ */
+/*  Swiper overrides                                                   */
+/* ------------------------------------------------------------------ */
+.swiper {
+  padding-bottom: 3rem !important;
 }
 
-.travel-cta-primary:hover {
-  background-color: #f8fafc;
+.swiper-pagination-bullet {
+  background: #c3cad6;
+  opacity: 1;
+  transition: width 0.25s ease, background 0.25s ease;
 }
 
-.travel-cta-secondary {
-  background-color: transparent;
-  border-color: #ffffff;
-  color: #ffffff;
+.swiper-pagination-bullet-active {
+  width: 22px;
+  border-radius: 999px;
+  background: var(--secondary);
 }
 
-.travel-cta-secondary:hover {
-  background-color: rgba(255, 255, 255, 0.1);
+.swiper-button-lock {
+  display: none;
+}
+
+/* Decorative dotted pattern used behind the hero */
+.dot-grid {
+  background-image: radial-gradient(currentColor 1.4px, transparent 1.4px);
+  background-size: 18px 18px;
+}
+
+@keyframes plane-dash {
+  to {
+    stroke-dashoffset: 0;
+  }
 }

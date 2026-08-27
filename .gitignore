@@ -24,3 +24,7 @@ dist-ssr
 *.sw?
 
 .vercel
+
+# Supabase CLI
+supabase/.temp
+supabase/.branches
