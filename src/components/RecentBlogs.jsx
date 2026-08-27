@@ -12,7 +12,13 @@ function RecentBlogs() {
 
   useEffect(() => {
     supabase.from('blogs').select('*').eq('status', 'published').order('publish_date', { ascending: false }).limit(3)
-      .then(({ data }) => setRecentPosts(data || []))
+      .then(({ data, error }) => {
+        if (error) {
+          console.error('[RecentBlogs] Supabase fetch failed:', error.message, error)
+          return
+        }
+        setRecentPosts(data || [])
+      })
   }, [])
 
   return (

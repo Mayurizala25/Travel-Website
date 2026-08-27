@@ -97,7 +97,17 @@ function Blog() {
   useEffect(() => {
     let active = true
     supabase.from('blogs').select('*').eq('status', 'published').order('publish_date', { ascending: false })
-      .then(({ data, error }) => { if (active) { setPosts(error ? [] : (data || []).map(toCardPost)); setStatus(error ? 'error' : 'ready') } })
+      .then(({ data, error }) => {
+        if (!active) return
+        if (error) {
+          // Surface the real cause (bad key, wrong URL, RLS, network) in the console.
+          console.error('[Blog] Supabase fetch failed:', error.message, error)
+          setStatus('error')
+          return
+        }
+        setPosts((data || []).map(toCardPost))
+        setStatus('ready')
+      })
     return () => { active = false }
   }, [])
 
