@@ -6,12 +6,20 @@ import { createClient } from '@supabase/supabase-js'
 const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim()
 const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim()
 
-if (!supabaseUrl || !supabasePublishableKey) {
-  // Loud, actionable error instead of a silent "temporarily unavailable".
+const missingEnv = !supabaseUrl || !supabasePublishableKey
+
+if (missingEnv) {
+  // Loud, actionable error instead of a silent failure.
   console.error(
     '[supabase] Missing env vars. Set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY ' +
       '(same names as .env.local) in the Vercel project, then redeploy.',
   )
 }
 
-export const supabase = createClient(supabaseUrl, supabasePublishableKey)
+// Fall back to a syntactically valid placeholder so createClient never throws at
+// import time — a bad/missing key must not blank the whole site. Supabase calls
+// then fail gracefully and are handled where they are made.
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabasePublishableKey || 'placeholder-key',
+)
