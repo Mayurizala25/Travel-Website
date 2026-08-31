@@ -27,10 +27,11 @@ function Home() {
   const selectedMessage = selectedTour ? `I am interested in the ${selectedTour.name} tour.` : ''
 
   useEffect(() => {
-    if (location.hash !== '#enquiry') return undefined
+    if (!location.hash) return undefined
 
+    const targetId = location.hash.substring(1)
     const frame = window.requestAnimationFrame(() => {
-      document.getElementById('enquiry')?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
     })
 
     return () => window.cancelAnimationFrame(frame)

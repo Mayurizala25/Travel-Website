@@ -1,25 +1,53 @@
-import { Camera, Compass, Globe, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
-import { Link } from 'react-router-dom'
+import { Compass, Globe, Mail, MapPin, MessageCircle, Phone } from 'lucide-react'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
 const quickLinks = [
-  { label: 'Home', href: '/#home' },
+  { label: 'Home', to: '/' },
   { label: 'Tours', to: '/tours' },
-  { label: 'Services', href: '/#services' },
+  { label: 'Services', to: '/#services' },
   { label: 'Blog', to: '/blog' },
-  { label: 'Why Us', href: '/#why-us' },
-  { label: 'FAQ', href: '/#faq' },
+  { label: 'Why Us', to: '/#why-us' },
+  { label: 'FAQ', to: '/#faq' },
 ]
 
 const popularDestinations = ['Kashmir', 'Manali', 'Ladakh', 'Rajasthan', 'Goa', 'Kerala']
 
 const socials = [
-  { label: 'Instagram', icon: Camera, href: 'https://instagram.com' },
+  { label: 'Phone', icon: Phone, href: 'tel:+918530165142' },
   { label: 'WhatsApp', icon: MessageCircle, href: 'https://wa.me/918530165142' },
   { label: 'Email', icon: Mail, href: 'mailto:tour@virtualrudra.com' },
-  { label: 'Website', icon: Globe, href: '/' },
+  { label: 'Contact', icon: Globe, to: '/#enquiry' },
 ]
 
 function Footer() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleLinkClick = (e, to) => {
+    if (to.startsWith('/#')) {
+      const targetId = to.substring(2)
+      if (location.pathname === '/') {
+        e.preventDefault()
+        document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+        navigate(to, { replace: true })
+      }
+    } else if (to === '/') {
+      if (location.pathname === '/') {
+        e.preventDefault()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+        navigate('/', { replace: true })
+      }
+    }
+  }
+
+  const handleDestinationClick = (e, name) => {
+    const targetUrl = `/tours?destination=${encodeURIComponent(name)}`
+    if (location.pathname === '/tours') {
+      e.preventDefault()
+      window.location.assign(targetUrl)
+    }
+  }
+
   return (
     <footer id="contact" className="bg-navy-deep px-5 pb-8 pt-16 text-white sm:px-8 sm:pt-20 lg:px-10">
       <div className="mx-auto max-w-7xl">
@@ -39,16 +67,32 @@ function Footer() {
               Thoughtfully planned journeys for curious travellers who want to see more and feel more.
             </p>
             <div className="mt-6 flex items-center gap-2">
-              {socials.map(({ label, icon: Icon, href }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-gold hover:text-gold"
-                >
-                  <Icon className="size-4" aria-hidden="true" />
-                </a>
-              ))}
+              {socials.map((item) => {
+                const Icon = item.icon
+                if (item.to) {
+                  return (
+                    <Link
+                      key={item.label}
+                      to={item.to}
+                      onClick={(e) => handleLinkClick(e, item.to)}
+                      aria-label={item.label}
+                      className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-gold hover:text-gold"
+                    >
+                      <Icon className="size-4" aria-hidden="true" />
+                    </Link>
+                  )
+                }
+                return (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    aria-label={item.label}
+                    className="inline-flex size-10 items-center justify-center rounded-full border border-white/15 text-white/70 transition-colors hover:border-gold hover:text-gold"
+                  >
+                    <Icon className="size-4" aria-hidden="true" />
+                  </a>
+                )
+              })}
             </div>
           </div>
 
@@ -57,15 +101,13 @@ function Footer() {
             <ul className="mt-5 space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.label}>
-                  {link.to ? (
-                    <Link className="text-sm text-white/60 transition-colors hover:text-gold" to={link.to}>
-                      {link.label}
-                    </Link>
-                  ) : (
-                    <a className="text-sm text-white/60 transition-colors hover:text-gold" href={link.href}>
-                      {link.label}
-                    </a>
-                  )}
+                  <Link
+                    className="text-sm text-white/60 transition-colors hover:text-gold"
+                    to={link.to}
+                    onClick={(e) => handleLinkClick(e, link.to)}
+                  >
+                    {link.label}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -79,6 +121,7 @@ function Footer() {
                   <Link
                     className="text-sm text-white/60 transition-colors hover:text-gold"
                     to={`/tours?destination=${encodeURIComponent(name)}`}
+                    onClick={(e) => handleDestinationClick(e, name)}
                   >
                     {name}
                   </Link>
