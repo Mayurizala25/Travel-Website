@@ -164,9 +164,10 @@
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
   }
 
-  /* Wider tracks for image-led cards (tours, blog). */
+  /* Wider tracks for image-led cards (tours, blog): 1 column on phones,
+     2 from ~500px, 3 once there is room. */
   .card-grid-wide {
-    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
   }
 
   @media (min-width: 640px) {

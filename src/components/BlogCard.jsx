@@ -17,31 +17,31 @@ function BlogCard({ post, href, onReadMore }) {
           decoding="async"
           className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <span className="absolute left-4 top-4 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-navy shadow-sm">
+        <span className="absolute left-3 top-3 rounded-full bg-gold px-3 py-1 text-xs font-semibold text-navy shadow-sm sm:left-4 sm:top-4">
           {post.category}
         </span>
       </div>
 
-      <div className="flex flex-1 flex-col p-6">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
         <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted">
           <span className="inline-flex items-center gap-1.5">
-            <CalendarDays className="size-3.5" aria-hidden="true" />
+            <CalendarDays className="size-3.5 shrink-0" aria-hidden="true" />
             {post.date}
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <Tag className="size-3.5" aria-hidden="true" />
+            <Tag className="size-3.5 shrink-0" aria-hidden="true" />
             {post.category}
           </span>
         </div>
 
-        <h3 className="mt-3 font-serif text-xl font-semibold text-navy">{post.title}</h3>
-        <p className="mt-2 line-clamp-2 text-sm leading-6 text-muted">{post.excerpt}</p>
+        <h3 className="mt-3 font-serif text-lg font-semibold text-navy sm:text-xl">{post.title}</h3>
+        <p className="mt-2 line-clamp-3 text-sm leading-6 text-muted">{post.excerpt}</p>
 
         {onReadMore ? (
           <button
             type="button"
             onClick={() => onReadMore(post)}
-            className="group/more mt-auto inline-flex items-center gap-1.5 self-start pt-5 text-sm font-semibold text-navy transition-colors hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+            className="group/more mt-auto inline-flex items-center gap-1.5 self-start pt-4 text-sm font-semibold text-navy transition-colors hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold sm:pt-5"
           >
             <span className="border-b border-transparent transition-colors group-hover/more:border-current">
               Read More
@@ -54,7 +54,7 @@ function BlogCard({ post, href, onReadMore }) {
         ) : (
           <a
             href={href}
-            className="group/more mt-auto inline-flex items-center gap-1.5 pt-5 text-sm font-semibold text-navy transition-colors hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+            className="group/more mt-auto inline-flex items-center gap-1.5 self-start pt-4 text-sm font-semibold text-navy transition-colors hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold sm:pt-5"
           >
             <span className="border-b border-transparent transition-colors group-hover/more:border-current">
               Read More
