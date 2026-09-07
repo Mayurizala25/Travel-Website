@@ -33,13 +33,31 @@ const navLinks = [
 
 function Navbar() {
   const [scrolled, setScrolled] = useState(false)
+  const [hidden, setHidden] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
   const location = useLocation()
 
+  // Track scroll position + direction. On phones the bar slides away while
+  // scrolling down and returns the moment you scroll up (see header classes).
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12)
-    onScroll()
+    let lastY = window.scrollY
+    let ticking = false
+    const update = () => {
+      const y = window.scrollY
+      setScrolled(y > 12)
+      if (y > lastY && y > 120) setHidden(true)
+      else if (y < lastY) setHidden(false)
+      lastY = y
+      ticking = false
+    }
+    const onScroll = () => {
+      if (!ticking) {
+        window.requestAnimationFrame(update)
+        ticking = true
+      }
+    }
+    update()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -72,6 +90,8 @@ function Navbar() {
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
+        menuOpen ? '' : hidden ? 'max-md:-translate-y-full' : 'max-md:translate-y-0'
+      } ${
         scrolled
           ? 'border-b border-line/70 bg-white/80 shadow-[0_8px_30px_-12px_rgba(15,37,69,0.18)] backdrop-blur-xl'
           : 'border-b border-transparent bg-white/40 backdrop-blur-md'
@@ -132,7 +152,7 @@ function Navbar() {
         {menuOpen && (
           <>
             <motion.div
-              className="fixed inset-0 z-40 bg-navy/40 backdrop-blur-sm lg:hidden"
+              className="fixed left-0 top-0 z-40 h-dvh w-dvw bg-navy/40 backdrop-blur-sm lg:hidden"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -141,7 +161,7 @@ function Navbar() {
             />
             <motion.aside
               id="mobile-drawer"
-              className="fixed right-0 top-0 z-50 flex h-full w-[82%] max-w-sm flex-col bg-white px-6 pb-8 pt-6 shadow-2xl lg:hidden"
+              className="fixed right-0 top-0 z-50 flex h-dvh w-[82%] max-w-sm flex-col overflow-y-auto bg-white px-6 pb-8 pt-6 shadow-2xl lg:hidden"
               initial={{ x: '100%' }}
               animate={{ x: 0 }}
               exit={{ x: '100%' }}

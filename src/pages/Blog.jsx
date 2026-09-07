@@ -148,7 +148,7 @@ function Blog() {
                   type="button"
                   onClick={() => setActiveCategory(category)}
                   aria-pressed={activeCategory === category}
-                  className={`rounded-full border px-4 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
+                  className={`rounded-full border px-4 py-2.5 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:py-2 ${
                     activeCategory === category
                       ? 'border-gold bg-gold text-navy'
                       : 'border-navy/30 text-navy hover:border-navy hover:bg-navy/5'

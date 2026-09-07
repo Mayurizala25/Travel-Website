@@ -49,9 +49,9 @@ function Footer() {
   }
 
   return (
-    <footer id="contact" className="bg-navy-deep px-5 pb-8 pt-16 text-white sm:px-8 sm:pt-20 lg:px-10">
+    <footer id="contact" className="bg-navy-deep px-5 pb-8 pt-12 text-white sm:px-8 sm:pt-20 lg:px-10">
       <div className="mx-auto max-w-7xl">
-        <div className="grid gap-12 border-b border-white/10 pb-12 sm:grid-cols-2 lg:grid-cols-[1.5fr_1fr_1fr_1.3fr]">
+        <div className="grid gap-10 border-b border-white/10 pb-10 sm:grid-cols-2 sm:gap-12 sm:pb-12 lg:grid-cols-[1.5fr_1fr_1fr_1.3fr]">
           <div className="max-w-xs">
             <div className="inline-flex items-center gap-3 rounded-2xl bg-white px-3 py-1.5 shadow-card">
               <img

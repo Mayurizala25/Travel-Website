@@ -58,7 +58,7 @@ function Testimonials() {
           subtitle="Thoughtful planning, beautiful places and memories our travellers keep coming back to."
         />
 
-        <motion.div variants={fadeIn} initial="hidden" whileInView="show" viewport={viewport} className="mt-14">
+        <motion.div variants={fadeIn} initial="hidden" whileInView="show" viewport={viewport} className="mt-10 sm:mt-14">
           <Swiper
             modules={[Autoplay, Pagination, A11y]}
             loop

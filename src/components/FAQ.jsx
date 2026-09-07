@@ -72,7 +72,7 @@ function FAQ() {
 
   return (
     <section id="faq" className="bg-white px-5 py-14 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
+      <div className="mx-auto grid max-w-7xl gap-8 sm:gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:gap-20">
         <SectionHeading
           eyebrow="Before You Book"
           title="Frequently asked questions"

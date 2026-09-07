@@ -31,7 +31,7 @@ function CTABanner() {
         initial="hidden"
         whileInView="show"
         viewport={viewport}
-        className="mx-auto grid max-w-7xl items-center gap-10 overflow-hidden rounded-[2.5rem] bg-navy-deep p-6 shadow-lift sm:p-10 lg:grid-cols-2 lg:gap-14 lg:p-14"
+        className="mx-auto grid max-w-7xl items-center gap-8 overflow-hidden rounded-3xl bg-navy-deep p-6 shadow-lift sm:gap-10 sm:rounded-[2.5rem] sm:p-10 lg:grid-cols-2 lg:gap-14 lg:p-14"
       >
         <div>
           <span className="inline-flex size-14 items-center justify-center rounded-2xl border-2 border-gold/50 text-gold">
@@ -44,7 +44,7 @@ function CTABanner() {
           </p>
           <Link
             to="/#enquiry"
-            className="mt-8 inline-flex items-center justify-center gap-2 rounded-full bg-gold px-7 py-3.5 text-sm font-semibold text-navy transition-all duration-300 hover:-translate-y-0.5 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            className="mt-8 inline-flex w-full items-center justify-center gap-2 rounded-full bg-gold px-5 py-3.5 text-sm font-semibold text-navy transition-all duration-300 hover:-translate-y-0.5 hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:w-auto sm:px-7"
           >
             Plan a group experience
             <ArrowRight className="size-4" aria-hidden="true" />

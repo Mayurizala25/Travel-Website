@@ -30,7 +30,7 @@ const aboutImages = [
 function About() {
   return (
     <section id="about" className="bg-white px-5 py-14 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
-      <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <div className="mx-auto grid max-w-7xl items-center gap-9 sm:gap-12 lg:grid-cols-2 lg:gap-16">
         <motion.div
           variants={staggerParent}
           initial="hidden"

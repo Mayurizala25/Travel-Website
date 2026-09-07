@@ -115,7 +115,7 @@ function ContactForm({ initialDestination = '', initialMessage = '' }) {
 
   return (
     <section id="enquiry" className="bg-white px-5 py-14 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
-      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
+      <div className="mx-auto grid max-w-7xl gap-8 sm:gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <div>
           <SectionHeading
             eyebrow="Start Planning"
