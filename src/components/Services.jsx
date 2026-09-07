@@ -65,7 +65,7 @@ function Services() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-10 grid grid-cols-1 gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4"
         >
           {services.map(({ title, description, icon: Icon, to, action }) => (
             <motion.article
