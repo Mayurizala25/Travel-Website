@@ -6,19 +6,24 @@ import SectionHeading from './SectionHeading'
 import { fadeUp, staggerParent, viewport } from '../lib/motion'
 import { useEffect, useState } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import { fallbackBlogPosts } from '../data/blogPosts'
 
 function RecentBlogs() {
   const [recentPosts, setRecentPosts] = useState([])
 
   useEffect(() => {
+    // Live posts win; bundled guides keep the section populated if Supabase
+    // is unreachable or empty (matches the Blog page behaviour).
+    const showBundledGuides = (reason) => {
+      if (reason) console.error('[RecentBlogs] Falling back to bundled guides:', reason)
+      setRecentPosts(fallbackBlogPosts.slice(0, 3))
+    }
     supabase.from('blogs').select('*').eq('status', 'published').order('publish_date', { ascending: false }).limit(3)
       .then(({ data, error }) => {
-        if (error) {
-          console.error('[RecentBlogs] Supabase fetch failed:', error.message, error)
-          return
-        }
-        setRecentPosts(data || [])
-      })
+        if (error) return showBundledGuides(error.message || error)
+        if (!data || data.length === 0) return showBundledGuides(null)
+        setRecentPosts(data)
+      }, (err) => showBundledGuides(err))
   }, [])
 
   return (

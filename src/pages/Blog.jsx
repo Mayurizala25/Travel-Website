@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
-import { AlertCircle, CalendarDays, Tag, X } from 'lucide-react'
+import { CalendarDays, Tag, X } from 'lucide-react'
 import Footer from '../components/Footer'
 import Navbar from '../components/Navbar'
 import BlogCard from '../components/BlogCard'
 import SectionHeading from '../components/SectionHeading'
 import { supabase } from '../lib/supabaseClient'
+import { fallbackBlogPosts } from '../data/blogPosts'
 
 const toCardPost = (post) => ({ ...post, image: post.cover_image_url, imageAlt: post.image_alt_text, date: post.publish_date })
 
@@ -96,17 +97,22 @@ function Blog() {
 
   useEffect(() => {
     let active = true
+    // Live posts win; the bundled guides are a fallback so visitors never
+    // see an empty or errored page if Supabase is unreachable or has no rows.
+    const showBundledGuides = (reason) => {
+      if (reason) console.error('[Blog] Falling back to bundled guides:', reason)
+      setPosts(fallbackBlogPosts.map(toCardPost))
+      setStatus('ready')
+    }
     supabase.from('blogs').select('*').eq('status', 'published').order('publish_date', { ascending: false })
       .then(({ data, error }) => {
         if (!active) return
-        if (error) {
-          // Surface the real cause (bad key, wrong URL, RLS, network) in the console.
-          console.error('[Blog] Supabase fetch failed:', error.message, error)
-          setStatus('error')
-          return
-        }
-        setPosts((data || []).map(toCardPost))
+        if (error) return showBundledGuides(error.message || error)
+        if (!data || data.length === 0) return showBundledGuides(null)
+        setPosts(data.map(toCardPost))
         setStatus('ready')
+      }, (err) => {
+        if (active) showBundledGuides(err)
       })
     return () => { active = false }
   }, [])
@@ -159,15 +165,9 @@ function Blog() {
               ))}
             </div>
 
-            {status === 'loading' && <p className="py-20 text-center text-sm text-muted">Loading published stories...</p>}
-            {status === 'error' && (
-              <p className="mx-auto mt-12 flex max-w-md items-center justify-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-5 py-4 text-sm text-red-700">
-                <AlertCircle className="size-4" />
-                Published stories are temporarily unavailable.
-              </p>
-            )}
+            {status === 'loading' && <p className="py-20 text-center text-sm text-muted">Loading travel guides...</p>}
             {status === 'ready' && visiblePosts.length === 0 && (
-              <p className="py-20 text-center text-sm text-muted">No published stories yet.</p>
+              <p className="py-20 text-center text-sm text-muted">No guides in this category yet.</p>
             )}
             {status === 'ready' && visiblePosts.length > 0 && (
               <div className="mt-12 card-grid card-grid-wide lg:grid-cols-3">
