@@ -29,25 +29,25 @@ function TravelStyles() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mt-14 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3"
+          className="mt-10 grid grid-cols-2 gap-3 sm:mt-14 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3"
         >
           {styles.map(({ name, description, icon: Icon }) => (
             <motion.article
               key={name}
               variants={fadeUp}
-              className="group rounded-3xl border-2 border-line bg-white p-7 transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:shadow-lift"
+              className="group rounded-3xl border-2 border-line bg-white p-4 transition-all duration-300 hover:-translate-y-1.5 hover:border-gold hover:shadow-lift sm:p-7"
             >
-              <span className="mb-6 inline-flex size-14 items-center justify-center rounded-2xl bg-navy/5 text-navy transition-colors duration-300 group-hover:bg-gold group-hover:text-navy">
-                <Icon className="size-6" strokeWidth={1.8} aria-hidden="true" />
+              <span className="mb-3 inline-flex size-11 items-center justify-center rounded-xl bg-navy/5 text-navy transition-colors duration-300 group-hover:bg-gold group-hover:text-navy sm:mb-6 sm:size-14 sm:rounded-2xl">
+                <Icon className="size-5 sm:size-6" strokeWidth={1.8} aria-hidden="true" />
               </span>
-              <h3 className="font-serif text-xl font-semibold text-navy">{name}</h3>
-              <p className="mt-3 text-sm leading-6 text-muted">{description}</p>
+              <h3 className="font-serif text-base font-semibold text-navy sm:text-xl">{name}</h3>
+              <p className="mt-1.5 line-clamp-3 text-xs leading-5 text-muted sm:mt-3 sm:line-clamp-none sm:text-sm sm:leading-6">{description}</p>
               <Link
                 to={`/tours?category=${encodeURIComponent(name)}`}
-                className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-navy transition-colors group-hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-navy transition-colors group-hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold sm:mt-6 sm:gap-1.5 sm:text-sm"
               >
                 Explore
-                <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1 sm:size-4" aria-hidden="true" />
               </Link>
             </motion.article>
           ))}
