@@ -90,11 +90,11 @@ function Tours() {
             <div className="mb-8 overflow-hidden rounded-3xl bg-[var(--primary-hover)] px-6 py-8 text-white shadow-[var(--shadow-lift)] sm:mb-10 sm:px-10 sm:py-10">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
                 <div>
-                  <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--secondary)]">
-                    <MapPinned className="size-4" aria-hidden="true" />
+                  <div className="mb-3 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.12em] text-[var(--secondary)] sm:tracking-[0.2em]">
+                    <MapPinned className="size-4 shrink-0" aria-hidden="true" />
                     Curated journeys across India
                   </div>
-                  <h2 id="tours-grid-heading" className="text-3xl text-white sm:text-4xl">{destinationHeading}</h2>
+                  <h2 id="tours-grid-heading" className="text-2xl text-white sm:text-4xl">{destinationHeading}</h2>
                   <p className="mt-3 max-w-xl text-sm leading-6 text-white/70">Find a journey that fits the way you want to travel, with clear pricing and thoughtfully planned itineraries.</p>
                 </div>
                 <p className="inline-flex w-fit items-center rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-white" aria-live="polite">

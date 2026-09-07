@@ -95,7 +95,7 @@ function Hero() {
         <motion.div variants={container} initial="hidden" animate="show" className="min-w-0 max-w-2xl">
           <motion.p
             variants={item}
-            className="text-xs font-semibold uppercase tracking-[0.24em] text-gold"
+            className="text-xs font-semibold uppercase tracking-[0.16em] text-gold sm:tracking-[0.24em]"
           >
             Travel • Explore • Experience
           </motion.p>

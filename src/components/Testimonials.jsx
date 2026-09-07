@@ -50,7 +50,7 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section id="testimonials" className="bg-cream px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+    <section id="testimonials" className="bg-cream px-5 py-14 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
       <div className="mx-auto max-w-7xl">
         <SectionHeading
           eyebrow="Traveller Stories"

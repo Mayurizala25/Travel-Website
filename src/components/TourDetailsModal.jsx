@@ -47,13 +47,13 @@ function TourDetailsModal({ tour, onClose }) {
   return (
     <div className="fixed inset-0 z-50 overflow-y-auto bg-[var(--foreground)]/70 p-0 backdrop-blur-sm sm:p-5 lg:p-8" role="dialog" aria-modal="true" aria-labelledby="tour-details-title">
       <div className="mx-auto min-h-full max-w-6xl overflow-hidden border border-[var(--border)] bg-[var(--surface)] shadow-2xl sm:rounded-2xl">
-        <div className="relative h-[45vh] min-h-80 max-h-[28rem] bg-[var(--foreground)] sm:h-[26rem] lg:h-[28rem]">
+        <div className="relative h-[42vh] min-h-64 max-h-[28rem] bg-[var(--foreground)] sm:h-[26rem] sm:min-h-0 lg:h-[28rem]">
           <img src={selectedImage.image} alt={`${tour.name} - ${selectedImage.title}`} loading="eager" decoding="async" className="size-full object-cover transition-opacity duration-300" />
           <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/15 to-transparent" />
-          <button type="button" onClick={showPreviousImage} className="absolute left-4 top-1/2 z-10 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-xl bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" aria-label="Previous gallery image">
+          <button type="button" onClick={showPreviousImage} className="absolute left-3 top-1/3 z-10 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-xl bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:left-4 sm:top-1/2" aria-label="Previous gallery image">
             <ChevronLeft className="size-5" aria-hidden="true" />
           </button>
-          <button type="button" onClick={showNextImage} className="absolute right-4 top-1/2 z-10 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-xl bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" aria-label="Next gallery image">
+          <button type="button" onClick={showNextImage} className="absolute right-3 top-1/3 z-10 inline-flex size-11 -translate-y-1/2 items-center justify-center rounded-xl bg-black/35 text-white backdrop-blur-sm transition-colors hover:bg-black/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white sm:right-4 sm:top-1/2" aria-label="Next gallery image">
             <ChevronRight className="size-5" aria-hidden="true" />
           </button>
           <div className="absolute bottom-4 right-4 z-10 flex items-center gap-2 text-xs font-semibold text-white sm:bottom-6 sm:right-6">
@@ -65,10 +65,10 @@ function TourDetailsModal({ tour, onClose }) {
           <button type="button" onClick={onClose} className="absolute right-4 top-4 z-10 inline-flex size-11 items-center justify-center rounded-xl bg-white/90 text-[var(--foreground)] shadow-lg transition-colors hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white" aria-label="Close tour details">
             <X className="size-5" aria-hidden="true" />
           </button>
-          <div className="absolute inset-x-5 bottom-6 max-w-3xl text-white sm:inset-x-10 sm:bottom-10">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-[var(--secondary)]">{tour.category} journey</p>
-            <h2 id="tour-details-title" className="text-3xl text-white sm:text-5xl">{tour.name}</h2>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-white/85 sm:text-base">{tour.description}</p>
+          <div className="absolute inset-x-4 bottom-5 max-w-3xl text-white sm:inset-x-10 sm:bottom-10">
+            <p className="mb-2 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-[var(--secondary)] sm:mb-3 sm:text-xs sm:tracking-[0.2em]">{tour.category} journey</p>
+            <h2 id="tour-details-title" className="text-2xl text-white sm:text-5xl">{tour.name}</h2>
+            <p className="mt-2 line-clamp-3 max-w-2xl text-sm leading-6 text-white/85 sm:mt-3 sm:line-clamp-none sm:text-base">{tour.description}</p>
           </div>
         </div>
 

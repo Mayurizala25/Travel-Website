@@ -25,7 +25,7 @@ const groupPhotos = [
 
 function CTABanner() {
   return (
-    <section id="plan-trip" className="bg-cream px-5 py-16 sm:px-8 sm:py-20 lg:px-10">
+    <section id="plan-trip" className="bg-cream px-5 py-12 sm:px-8 sm:py-20 lg:px-10">
       <motion.div
         variants={fadeUp}
         initial="hidden"

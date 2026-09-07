@@ -129,7 +129,7 @@ function Blog() {
     <>
       <Navbar />
       <main className="bg-cream">
-        <section className="px-5 pb-24 pt-14 sm:px-8 sm:pt-20 lg:px-10" aria-labelledby="blog-heading">
+        <section className="px-5 pb-16 pt-14 sm:px-8 sm:pb-24 sm:pt-20 lg:px-10" aria-labelledby="blog-heading">
           <div className="mx-auto max-w-7xl">
             <SectionHeading
               as="h1"

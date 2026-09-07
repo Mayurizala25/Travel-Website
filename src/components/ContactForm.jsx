@@ -114,7 +114,7 @@ function ContactForm({ initialDestination = '', initialMessage = '' }) {
   const errorClass = 'mt-1 block text-sm font-medium text-red-600'
 
   return (
-    <section id="enquiry" className="bg-white px-5 py-20 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
+    <section id="enquiry" className="bg-white px-5 py-14 sm:px-8 sm:py-24 lg:px-10 lg:py-28">
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
         <div>
           <SectionHeading

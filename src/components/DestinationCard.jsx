@@ -31,7 +31,7 @@ function DestinationCard({ destination }) {
         <h3 className="font-serif text-2xl font-semibold text-white drop-shadow transition-transform duration-500 group-hover:-translate-y-1">{name}</h3>
         <p className="mt-2 line-clamp-2 text-sm leading-6 text-white/80 transition-colors duration-500 group-hover:text-white/95">{description}</p>
 
-        <div className="mt-4 flex items-center justify-between">
+        <div className="mt-4 flex flex-wrap items-center justify-between gap-x-3 gap-y-2">
           {price ? (
             <p className="text-sm text-white/70">
               From <span className="font-serif text-lg font-bold text-gold">₹{inr.format(price)}</span>

@@ -127,6 +127,30 @@
 }
 
 /* ------------------------------------------------------------------ */
+/*  Phone-only refinements (≤ 639px, i.e. below Tailwind's `sm`).       */
+/*  Tablet (≥ 768px) and desktop are untouched.                        */
+/* ------------------------------------------------------------------ */
+@media (max-width: 639px) {
+  /* The base display sizes are tuned for large screens; scale the
+     headings down a step so long titles stop wrapping awkwardly.
+     Components that set their own text-* size still win. */
+  h1 {
+    font-size: clamp(1.95rem, 8.5vw, 2.35rem);
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: clamp(1.5rem, 6vw, 1.8rem);
+    line-height: 1.15;
+  }
+
+  /* Carousel pagination sits closer to its slides on small screens. */
+  .swiper {
+    padding-bottom: 2.5rem !important;
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /*  Swiper overrides                                                   */
 /* ------------------------------------------------------------------ */
 .swiper {
