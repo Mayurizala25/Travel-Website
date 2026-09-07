@@ -65,25 +65,25 @@ function Services() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="mt-10 grid grid-cols-1 gap-6 sm:mt-14 sm:grid-cols-2 lg:grid-cols-4"
+          className="mt-10 card-grid sm:mt-14 min-[500px]:grid-cols-2 lg:grid-cols-4"
         >
           {services.map(({ title, description, icon: Icon, to, action }) => (
             <motion.article
               key={title}
               variants={fadeUp}
-              className="group flex flex-col rounded-3xl border border-line bg-cream p-7 transition-all duration-300 hover:-translate-y-2 hover:bg-white hover:shadow-lift"
+              className="group flex flex-col rounded-3xl border border-line bg-cream p-4 transition-all duration-300 hover:-translate-y-2 hover:bg-white hover:shadow-lift sm:p-7"
             >
-              <span className="mb-6 inline-flex size-14 items-center justify-center rounded-2xl bg-gold/15 text-gold-deep transition-colors duration-300 group-hover:bg-gold group-hover:text-navy">
-                <Icon className="size-6" strokeWidth={1.8} aria-hidden="true" />
+              <span className="mb-3 inline-flex size-11 items-center justify-center rounded-xl bg-gold/15 text-gold-deep transition-colors duration-300 group-hover:bg-gold group-hover:text-navy sm:mb-6 sm:size-14 sm:rounded-2xl">
+                <Icon className="size-5 sm:size-6" strokeWidth={1.8} aria-hidden="true" />
               </span>
-              <h3 className="font-serif text-xl font-semibold text-navy">{title}</h3>
-              <p className="mt-3 text-sm leading-6 text-muted">{description}</p>
+              <h3 className="font-serif text-base font-semibold text-navy sm:text-xl">{title}</h3>
+              <p className="mt-1.5 text-xs leading-5 text-muted sm:mt-3 sm:text-sm sm:leading-6">{description}</p>
               <ServiceLink
                 to={to}
-                className="mt-auto inline-flex items-center gap-1.5 pt-6 text-sm font-semibold text-navy transition-colors hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold"
+                className="mt-auto inline-flex items-center gap-1 pt-4 text-xs font-semibold text-navy transition-colors hover:text-gold-deep focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-gold sm:gap-1.5 sm:pt-6 sm:text-sm"
               >
                 {action}
-                <ArrowRight className="size-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                <ArrowRight className="size-3.5 transition-transform duration-200 group-hover:translate-x-1 sm:size-4" aria-hidden="true" />
               </ServiceLink>
             </motion.article>
           ))}

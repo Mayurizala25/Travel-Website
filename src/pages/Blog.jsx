@@ -170,7 +170,7 @@ function Blog() {
               <p className="py-20 text-center text-sm text-muted">No published stories yet.</p>
             )}
             {status === 'ready' && visiblePosts.length > 0 && (
-              <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="mt-12 card-grid card-grid-wide lg:grid-cols-3">
                 {visiblePosts.map((post) => (
                   <BlogCard key={post.id} post={post} onReadMore={setActivePost} />
                 ))}

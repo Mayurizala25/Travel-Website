@@ -151,6 +151,32 @@
 }
 
 /* ------------------------------------------------------------------ */
+/*  Fluid card grid                                                    */
+/*  Columns auto-fit to the viewport — no fixed widths, no overflow.   */
+/*  `min(100%, …)` collapses to a single column when the container is  */
+/*  narrower than one track. Sections may still pin an explicit column */
+/*  count at sm/lg for larger screens.                                 */
+/* ------------------------------------------------------------------ */
+@layer components {
+  .card-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 9.5rem), 1fr));
+  }
+
+  /* Wider tracks for image-led cards (tours, blog). */
+  .card-grid-wide {
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      gap: 1.5rem;
+    }
+  }
+}
+
+/* ------------------------------------------------------------------ */
 /*  Swiper overrides                                                   */
 /* ------------------------------------------------------------------ */
 .swiper {

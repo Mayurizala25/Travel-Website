@@ -47,7 +47,7 @@ function RecentBlogs() {
           initial="hidden"
           whileInView="show"
           viewport={viewport}
-          className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          className="card-grid card-grid-wide lg:grid-cols-3"
         >
           {recentPosts.map((post) => (
             <motion.div key={post.id} variants={fadeUp} className="h-full">
