@@ -1,25 +1,19 @@
 import { createClient } from '@supabase/supabase-js'
 
-// Frontend uses ONLY the publishable/anon key. Never put a service-role key here.
-// Both values are read from Vite env vars (inlined at build time) and must be set
-// with these exact names locally (.env.local) and on the host (Vercel).
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim()
-const supabasePublishableKey = import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim()
+// Frontend uses ONLY the publishable/anon key. It is safe to expose in the
+// bundle — every table is gated by Row Level Security (anon can read published
+// blogs and insert trip enquiries, nothing else). Never put a service-role key
+// here.
+//
+// A build-time env var (.env, .env.local, or the host dashboard) overrides the
+// defaults below. The hardcoded fallback is the same public config committed in
+// .env, so the app keeps working even if the host has missing or empty
+// VITE_SUPABASE_* variables.
+const FALLBACK_SUPABASE_URL = 'https://ttvyuavtvpwmceulrdpb.supabase.co'
+const FALLBACK_SUPABASE_PUBLISHABLE_KEY = 'sb_publishable___4BvW_4dHT4BPEIGwzClA_0kUA7y34'
 
-const missingEnv = !supabaseUrl || !supabasePublishableKey
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL?.trim() || FALLBACK_SUPABASE_URL
+const supabasePublishableKey =
+  import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY?.trim() || FALLBACK_SUPABASE_PUBLISHABLE_KEY
 
-if (missingEnv) {
-  // Loud, actionable error instead of a silent failure.
-  console.error(
-    '[supabase] Missing env vars. Set VITE_SUPABASE_URL and VITE_SUPABASE_PUBLISHABLE_KEY ' +
-      '(same names as .env.local) in the Vercel project, then redeploy.',
-  )
-}
-
-// Fall back to a syntactically valid placeholder so createClient never throws at
-// import time — a bad/missing key must not blank the whole site. Supabase calls
-// then fail gracefully and are handled where they are made.
-export const supabase = createClient(
-  supabaseUrl || 'https://placeholder.supabase.co',
-  supabasePublishableKey || 'placeholder-key',
-)
+export const supabase = createClient(supabaseUrl, supabasePublishableKey)
